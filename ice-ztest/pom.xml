@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ice.bike</groupId>
+		<artifactId>ice-bike</artifactId>
+		<version>0.1</version>
+	</parent>
+	<artifactId>ice-ztest</artifactId>
+	<dependencies>
+		<!-- local start -->
+		<dependency>
+			<groupId>com.ice.bike</groupId>
+			<artifactId>ice-webapi</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ice.bike</groupId>
+			<artifactId>ice-proxy</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>libmisc</groupId>
+			<artifactId>libmisc</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<!-- local end -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- netty start -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+		</dependency>
+		<!-- netty end -->
+	</dependencies>
+</project>

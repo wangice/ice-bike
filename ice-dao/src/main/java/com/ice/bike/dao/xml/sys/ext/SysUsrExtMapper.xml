@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ice.bike.dao.mapper.sys.ext.SysUsrExtMapper">
+	<resultMap id="BaseResultMap" type="com.ice.bike.dao.bo.sys.SysUsr">
+		<id column="ufb_id" property="id" jdbcType="INTEGER" />
+		<result column="ufb_phone" property="phone" jdbcType="CHAR" />
+		<result column="ufb_account" property="account" jdbcType="VARCHAR" />
+		<result column="ufb_usr_name" property="usrName" jdbcType="VARCHAR" />
+		<result column="ufb_pwd" property="pwd" jdbcType="VARCHAR" />
+		<result column="ufb_role" property="role" jdbcType="INTEGER" />
+		<result column="ufb_identity" property="identity" jdbcType="CHAR" />
+		<result column="ufb_identity_status" property="identityStatus"
+			jdbcType="CHAR" />
+		<result column="ufb_email" property="email" jdbcType="VARCHAR" />
+		<result column="ufb_img_path" property="imgPath" jdbcType="VARCHAR" />
+		<result column="ufb_create_time" property="createTime"
+			jdbcType="TIMESTAMP" />
+		<result column="ufb_update_time" property="updateTime"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ufb.id as ufb_id, ufb.phone as ufb_phone, ufb.account as
+		ufb_account,
+		ufb.usr_name as ufb_usr_name,
+		ufb.pwd as ufb_pwd, ufb.role
+		as ufb_role, ufb.identity as ufb_identity,
+		ufb.identity_status as
+		ufb_identity_status,
+		ufb.email as ufb_email, ufb.img_path as
+		ufb_img_path, ufb.create_time as
+		ufb_create_time,
+		ufb.update_time as
+		ufb_update_time
+	</sql>
+	<select id="selectSysUsrByPhone" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from tb_usr ufb
+		where ufb.phone = #{phone,jdbcType=VARCHAR}
+	</select>
+	<!-- -->
+	<select id="selectSysUsrByAccount" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from tb_usr ufb
+		where ufb.account = #{account,jdbcType=VARCHAR}
+	</select>
+	<!-- -->
+	<select id="selectSysUsrByPhoneOrAccount" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_usr ufb
+		where ufb.account = #{account,jdbcType=VARCHAR}
+		or
+		ufb.phone = #{phone,jdbcType=VARCHAR}
+	</select>
+</mapper>

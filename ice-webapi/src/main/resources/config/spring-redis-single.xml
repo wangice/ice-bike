@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="${redis.jedisPoolConfig.maxTotal}"></property>
+		<property name="maxIdle" value="${redis.jedisPoolConfig.maxIdle}"></property>
+		<property name="minIdle" value="${redis.jedisPoolConfig.minIdle}"></property>
+		<property name="maxWaitMillis" value="${redis.jedisPoolConfig.maxWaitMillis}"></property>
+		<property name="minEvictableIdleTimeMillis"
+			value="${redis.jedisPoolConfig.minEvictableIdleTimeMillis}"></property>
+		<property name="numTestsPerEvictionRun"
+			value="${redis.jedisPoolConfig.numTestsPerEvictionRun}"></property>
+		<property name="timeBetweenEvictionRunsMillis"
+			value="${redis.jedisPoolConfig.timeBetweenEvictionRunsMillis}"></property>
+		<property name="testOnBorrow" value="${redis.jedisPoolConfig.testOnBorrow}"></property>
+		<property name="testOnReturn" value="${redis.jedisPoolConfig.testOnReturn}"></property>
+		<property name="testWhileIdle" value="${redis.jedisPoolConfig.testWhileIdle}"></property>
+	</bean>
+
+	<bean id="jedisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		destroy-method="destroy">
+		<property name="hostName" value="${redis.jedisConnectionFactory.host}" />
+		<property name="port" value="${redis.jedisConnectionFactory.port}" />
+		<property name="timeout" value="${redis.jedisConnectionFactory.timeout}" />
+		<!-- <property name="database" value="${redis.jedisConnectionFactory.database}" 
+			/> -->
+		<!-- <property name="password" value="${redis.jedisConnectionFactory.password}" 
+			/> -->
+		<property name="usePool" value="${redis.jedisConnectionFactory.usePool}" />
+		<property name="poolConfig" ref="jedisPoolConfig" />
+	</bean>
+
+	<bean id="stringRedisSerializer"
+		class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+	<bean id="jdkSerializer"
+		class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+	<!-- 将默认的jdk序列化转化为Jsckson格式的 -->
+	<bean id="defaultSerializer"
+		class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer" />
+
+	<!-- 尽量只使用该这种，而不要使用StringRedisTemplate,否则在保存pojo时会失败 -->
+	<!-- redis template definition p表示对该bean里面的属性进行注入，格式为p:属性名=注入的对象 效果与在bean里面使用<property>标签一样 -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+		p:connection-factory-ref="jedisConnectionFactory">
+		<!-- 序列化方式 建议key/hashKey采用StringRedisSerializer。 -->
+		<!-- 序列化方法 -->
+		<property name="keySerializer" ref="stringRedisSerializer" />
+		<property name="hashKeySerializer" ref="stringRedisSerializer" />
+		<property name="defaultSerializer" ref="defaultSerializer" />
+
+	</bean>
+
+</beans>
