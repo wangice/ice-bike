@@ -1,4 +1,4 @@
-package com.ice.bike.common.mogodb;
+package com.ice.bike.common.mogodb.impl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.data.mongodb.core.MongoTemplate;
 
+import com.ice.bike.common.mogodb.DeviceLocationService;
+import com.ice.bike.common.mogodb.DeviceLocationVo;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
