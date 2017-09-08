@@ -21,9 +21,10 @@
 		<jsp-api.version>2.2.1-b03</jsp-api.version>
 		<jstl.version>1.2</jstl.version>
 		<taglibs.version>1.1.2</taglibs.version>
-		<slf4j.version>1.7.21</slf4j.version>
-		<slf-log4j.version>1.7.21</slf-log4j.version>
-		<log4j.version>1.2.17</log4j.version>
+		<slf4j-api.version>1.7.21</slf4j-api.version>
+		<logback.version>1.1.7</logback.version>
+		<logback.ext.spring.version>0.1.4</logback.ext.spring.version>
+		<jcl-over-slf4j.version>1.7.20</jcl-over-slf4j.version>
 		<jackson.version>1.9.12</jackson.version>
 		<json-lib.version>2.4</json-lib.version>
 		<commons-collections.version>20040616</commons-collections.version>
@@ -39,7 +40,6 @@
 		<jackson.databind.version>2.8.9</jackson.databind.version>
 		<jackson.version>1.9.13</jackson.version>
 		<ehcache.version>2.6.8</ehcache.version>
-		<alipay.sdk.version>java201703071631</alipay.sdk.version>
 		<spring.version>4.3.2.RELEASE</spring.version>
 		<cglib.version>3.2.4</cglib.version>
 		<aspectj.version>1.8.9</aspectj.version>
@@ -152,24 +152,34 @@
 			</dependency>
 			<!-- spring end -->
 
-			<!-- log4j start -->
+			<!-- logback start -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
-				<version>${slf4j.version}</version>
+				<version>${slf4j-api.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.logback-extensions</groupId>
+				<artifactId>logback-ext-spring</artifactId>
+				<version>${logback.ext.spring.version}</version>
+			</dependency>
+			<!-- 将Spring源代码中大量使用到的commons-logging替换成slf4j -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${slf-log4j.version}</version>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${jcl-over-slf4j.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>${log4j.version}</version>
-			</dependency>
-
-			<!-- log4j end -->
+			<!-- logback end -->
 
 
 			<!-- jackson start -->
@@ -353,11 +363,6 @@
 				<groupId>jdom</groupId>
 				<artifactId>jdom</artifactId>
 				<version>${jdom.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.sdk</groupId>
-				<artifactId>alipay-sdk</artifactId>
-				<version>${alipay.sdk.version}</version>
 			</dependency>
 			<!-- 工具 end -->
 

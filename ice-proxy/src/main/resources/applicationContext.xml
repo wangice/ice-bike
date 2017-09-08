@@ -24,10 +24,11 @@
 				<value>classpath:netty-server.properties</value>
 				<value>classpath:properties/redis-single.properties</value>
 				<value>classpath:properties/mogodb.properties</value>
+				<value>classpath:properties/jdbc.properties</value>
 			</list>
 		</property>
 		<property name="fileEncoding" value="utf-8" />
 	</bean>
 	<import resource="config/spring-dao.xml" />
-	<import resource="config/spring-redis-single.xml" />
+	<!-- <import resource="config/spring-redis-single.xml" /> -->
 </beans>

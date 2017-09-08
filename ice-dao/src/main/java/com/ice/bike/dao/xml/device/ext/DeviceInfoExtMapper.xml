@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ice.bike.dao.mapper.device.ext.DeviceInfoExtMapper">
+  <resultMap id="BaseResultMap" type="com.ice.bike.dao.bo.device.DeviceInfo">
+    <id column="din_id" jdbcType="INTEGER" property="id" />
+    <result column="din_device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="din_device_serial" jdbcType="VARCHAR" property="deviceSerial" />
+    <result column="din_device_mac" jdbcType="VARCHAR" property="deviceMac" />
+    <result column="din_device_imsi" jdbcType="VARCHAR" property="deviceImsi" />
+    <result column="din_device_monitor_version" jdbcType="VARCHAR" property="deviceMonitorVersion" />
+    <result column="din_device_Gprs_item" jdbcType="TINYINT" property="deviceGprsItem" />
+    <result column="din_device_csq" jdbcType="TINYINT" property="deviceCsq" />
+    <result column="din_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    din.id as din_id, din.device_id as din_device_id, din.device_serial as din_device_serial, 
+    din.device_mac as din_device_mac, din.device_imsi as din_device_imsi, din.device_monitor_version as din_device_monitor_version, 
+    din.device_Gprs_item as din_device_Gprs_item, din.device_csq as din_device_csq, din.update_time as din_update_time
+  </sql>
+<select id="findDeviceInfoByDeviceId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_device_info din
+    where din.deviceId = #{deviceId,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ice.bike.dao.mapper.device.DeviceInfoMapper">
+  <resultMap id="BaseResultMap" type="com.ice.bike.dao.bo.device.DeviceInfo">
+    <id column="din_id" jdbcType="INTEGER" property="id" />
+    <result column="din_device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="din_device_serial" jdbcType="VARCHAR" property="deviceSerial" />
+    <result column="din_device_mac" jdbcType="VARCHAR" property="deviceMac" />
+    <result column="din_device_imsi" jdbcType="VARCHAR" property="deviceImsi" />
+    <result column="din_device_monitor_version" jdbcType="VARCHAR" property="deviceMonitorVersion" />
+    <result column="din_device_Gprs_item" jdbcType="TINYINT" property="deviceGprsItem" />
+    <result column="din_device_csq" jdbcType="TINYINT" property="deviceCsq" />
+    <result column="din_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    din.id as din_id, din.device_id as din_device_id, din.device_serial as din_device_serial, 
+    din.device_mac as din_device_mac, din.device_imsi as din_device_imsi, din.device_monitor_version as din_device_monitor_version, 
+    din.device_Gprs_item as din_device_Gprs_item, din.device_csq as din_device_csq, din.update_time as din_update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_device_info din
+    where din.id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_device_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ice.bike.dao.bo.device.DeviceInfo">
+    insert into tb_device_info (id, device_id, device_serial, 
+      device_mac, device_imsi, device_monitor_version, 
+      device_Gprs_item, device_csq, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{deviceId,jdbcType=VARCHAR}, #{deviceSerial,jdbcType=VARCHAR}, 
+      #{deviceMac,jdbcType=VARCHAR}, #{deviceImsi,jdbcType=VARCHAR}, #{deviceMonitorVersion,jdbcType=VARCHAR}, 
+      #{deviceGprsItem,jdbcType=TINYINT}, #{deviceCsq,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ice.bike.dao.bo.device.DeviceInfo">
+    insert into tb_device_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="deviceSerial != null">
+        device_serial,
+      </if>
+      <if test="deviceMac != null">
+        device_mac,
+      </if>
+      <if test="deviceImsi != null">
+        device_imsi,
+      </if>
+      <if test="deviceMonitorVersion != null">
+        device_monitor_version,
+      </if>
+      <if test="deviceGprsItem != null">
+        device_Gprs_item,
+      </if>
+      <if test="deviceCsq != null">
+        device_csq,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSerial != null">
+        #{deviceSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceMac != null">
+        #{deviceMac,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceImsi != null">
+        #{deviceImsi,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceMonitorVersion != null">
+        #{deviceMonitorVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceGprsItem != null">
+        #{deviceGprsItem,jdbcType=TINYINT},
+      </if>
+      <if test="deviceCsq != null">
+        #{deviceCsq,jdbcType=TINYINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ice.bike.dao.bo.device.DeviceInfo">
+    update tb_device_info
+    <set>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSerial != null">
+        device_serial = #{deviceSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceMac != null">
+        device_mac = #{deviceMac,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceImsi != null">
+        device_imsi = #{deviceImsi,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceMonitorVersion != null">
+        device_monitor_version = #{deviceMonitorVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceGprsItem != null">
+        device_Gprs_item = #{deviceGprsItem,jdbcType=TINYINT},
+      </if>
+      <if test="deviceCsq != null">
+        device_csq = #{deviceCsq,jdbcType=TINYINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ice.bike.dao.bo.device.DeviceInfo">
+    update tb_device_info
+    set device_id = #{deviceId,jdbcType=VARCHAR},
+      device_serial = #{deviceSerial,jdbcType=VARCHAR},
+      device_mac = #{deviceMac,jdbcType=VARCHAR},
+      device_imsi = #{deviceImsi,jdbcType=VARCHAR},
+      device_monitor_version = #{deviceMonitorVersion,jdbcType=VARCHAR},
+      device_Gprs_item = #{deviceGprsItem,jdbcType=TINYINT},
+      device_csq = #{deviceCsq,jdbcType=TINYINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
